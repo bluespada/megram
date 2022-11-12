@@ -12,6 +12,7 @@ import (
 	"os"
 	"sync"
 
+	ServerModels "github.com/bluespada/megram/src/models"
 	ServerRoutes "github.com/bluespada/megram/src/routes"
 	ServerUtils "github.com/bluespada/megram/src/utils"
 	"github.com/gofiber/fiber/v2"
@@ -41,7 +42,8 @@ func main() {
 			log.Fatalln(err)
 		}
 		// initialize auto migrate for models
-
+		db.AutoMigrate(ServerModels.ResUsers{})
+		// initialize global database utils
 		ServerUtils.AppDatabase = db
 		wg.Done()
 	}()
