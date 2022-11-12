@@ -12,6 +12,7 @@ import (
 	"os"
 	"sync"
 
+	ServerRoutes "github.com/bluespada/megram/src/routes"
 	ServerUtils "github.com/bluespada/megram/src/utils"
 	"github.com/gofiber/fiber/v2"
 	"github.com/joho/godotenv"
@@ -47,6 +48,8 @@ func main() {
 
 	go func() {
 		// initialize server
+		// handle app routes
+		ServerRoutes.InitializeRouter(app)
 		log.Fatalln(app.Listen(":" + os.Getenv("APP_PORT")))
 		wg.Done()
 	}()
